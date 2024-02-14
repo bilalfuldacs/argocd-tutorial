@@ -1,20 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: complete-end-to-end-pipeline
 spec:
-  replicas: 1
+  replicas: 2
   selector:
-    matchLabels:
-      run: nginx
+    matchLabels: complete-end-to-end-pipeline
   template:
     metadata:
       labels:
-        run: nginx
+        app: complete-end-to-end-pipeline
     spec:
       containers:
-      - name: nginx
-        image: nginx
+      - name: complete-end-to-end-pipeline
+        image: bilal4178/complete-prodcution-e2e-pipeline
         ports:
-          - containerPort: 80
-        imagePullPolicy: IfNotPresent
+          - containerPort: 8080
+        
