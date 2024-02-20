@@ -39,7 +39,7 @@ pipeline {
                 sh """
                 git config --global user.name "bilalfuldacs"
                 git config --global user.email "bilalfuldacs@gmail.com"
-                git add deployment.yaml
+                git add quickstart-demo/deployment.yaml
                 git commit -m "updated yaml file"
                 """
                withCredentials([gitUsernamePassword(credentialsId: 'github-pat', gitToolName: 'Default')]){
