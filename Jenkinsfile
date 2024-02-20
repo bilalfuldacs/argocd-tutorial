@@ -42,7 +42,8 @@ pipeline {
                 git add quickstart-demo/deployment.yaml
                 git commit -m "Update deployment.yaml"
                 """
-                sh "git push https://github.com/bilalfuldacs/complete-prodcution-e2e-pipeline.git main"
+                sh "git push git@github.com:bilalfuldacs/complete-prodcution-e2e-pipeline.git main"
+
             }
         }
     
