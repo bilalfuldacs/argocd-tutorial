@@ -1,11 +1,12 @@
 pipeline {
     agent any
 
+    
     environment {
         APP_NAME = "complete-prodcution-e2e-pipeline"
-        GITHUB_EMAIL = credentials('bilalfuldacs@gmail.com')
-        GITHUB_PASSWORD = credentials('Ponkvscina@o11')
+       
     }
+
 
     stages {
         stage('Cleanup Workspace') {
@@ -28,25 +29,26 @@ pipeline {
                 cat quickstart-demo/deployment.yaml
                 sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' quickstart-demo/deployment.yaml
                 cat quickstart-demo/deployment.yaml
+
                 """
             }
         }
 
-        stage("Push to GitHub") {
-            steps {
-                // Set Git user name and email
-                sh "git config --global user.email '${GITHUB_EMAIL}'"
-                sh "git config --global user.password '${GITHUB_PASSWORD}'"
-                
-                // Add the changed file to the Git index
-                sh "git add quickstart-demo/deployment.yaml"
-
-                // Commit the changes
-                sh "git commit -m 'updated yaml file'"
-
-                // Push changes to GitHub
+        stage('pushed the changed deployment') {
+             steps {
+                sh """
+                git config --global user.name "bilalfuldacs"
+                git config --global user.email "bilalfuldacs@gmail.com"
+                git add quickstart-demo/deployment.yaml
+                git commit -m "updated yaml file"
+                """
+               withCredentials([gitUsernamePassword(credentialsId: 'github-pat', gitToolName: 'Default')]){
                 sh "git push https://github.com/bilalfuldacs/argocd-tutorial.git main"
+               }
             }
         }
+    
+
+    
     }
 }
