@@ -45,11 +45,11 @@ pipeline {
 
         // Commit the changes
         sh "git commit -m 'updated yaml file'"
-
-        // Push the changes to GitHub
-        withCredentials([gitUsernamePassword(credentialsId: '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', gitToolName: 'Default')]) {
-            sh "git push https://github.com/bilalfuldacs/argocd-tutorial.git main"
-        }
+// Push the changes to GitHub
+        git branch: 'main',
+            credentialsId: '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',
+            url: 'https://github.com/bilalfuldacs/argocd-tutorial.git',
+            pushOnly: true
     }
 }
 
