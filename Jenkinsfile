@@ -34,17 +34,15 @@ pipeline {
             }
         }
 
-        stage('pushed the changed deployment') {
-             steps {
+        stage('Push to GitHub') {
+            steps {
                 sh """
                 git config --global user.name "bilalfuldacs"
                 git config --global user.email "bilalfuldacs@gmail.com"
                 git add quickstart-demo/deployment.yaml
-                git commit -m "updated yaml file"
+                git commit -m "Update deployment.yaml"
                 """
-               withCredentials((credentialsId: 'github', gitToolName: 'Default')){
-                sh "git push https://github.com/bilalfuldacs/argocd-tutorial.git main"
-               }
+                sh "git push https://github.com/bilalfuldacs/complete-prodcution-e2e-pipeline.git main"
             }
         }
     
