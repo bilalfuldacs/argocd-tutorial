@@ -42,7 +42,7 @@ pipeline {
                 git add quickstart-demo/deployment.yaml
                 git commit -m "updated yaml file"
                 """
-               withCredentials([gitUsernamePassword(credentialsId: 'github-pat', gitToolName: 'Default')]){
+               withCredentials((credentialsId: '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', gitToolName: 'Default')){
                 sh "git push https://github.com/bilalfuldacs/argocd-tutorial.git main"
                }
             }
