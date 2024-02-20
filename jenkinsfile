@@ -26,9 +26,9 @@ pipeline {
         stage('Update the development tag') {
             steps {
                 sh """
-                cat deployment.yaml
-                sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
-                cat deployment.yaml
+                cat quickstart-demo/deployment.yaml
+                sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' quickstart-demo/deployment.yaml
+                cat quickstart-demo/deployment.yaml
 
                 """
             }
