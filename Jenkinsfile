@@ -34,20 +34,19 @@ pipeline {
             }
         }
 
-       stage('pushed the changed deployment') {
-    steps {
-        sh """
-        git config --global user.name "bilalfuldacs"
-        git config --global user.email "bilalfuldacs@gmail.com"
-        git add quickstart-demo/deployment.yaml
-        git commit -m "updated yaml file"
-        """
-        withCredentials([gitUsernamePassword(credentialsId: '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')]) {
-            sh "git push https://github.com/bilalfuldacs/argocd-tutorial.git main"
+        stage('pushed the changed deployment') {
+             steps {
+                sh """
+                git config --global user.name "bilalfuldacs"
+                git config --global user.email "bilalfuldacs@gmail.com"
+                git add quickstart-demo/deployment.yaml
+                git commit -m "updated yaml file"
+                """
+               withCredentials((credentialsId: 'github', gitToolName: 'Default')){
+                sh "git push https://github.com/bilalfuldacs/argocd-tutorial.git main"
+               }
+            }
         }
-    }
-}
-
     
 
     
